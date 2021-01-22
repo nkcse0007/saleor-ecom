@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, List
-
+from django.core.handlers.wsgi import WSGIRequest
 from saleor.plugins.base_plugin import BasePlugin, ConfigurationTypeField
+from django.shortcuts import HttpResponse
 
 from ..utils import get_supported_currencies
 from . import (
@@ -46,18 +47,18 @@ class CheckoutGatewayPlugin(BasePlugin):
     CONFIG_STRUCTURE = {
         "Public API key": {
             "type": ConfigurationTypeField.SECRET,
-            "help_text": "Provide Stripe public API key.",
+            "help_text": "Provide Checkout public API key.",
             "label": "Public API key",
         },
         "Secret API key": {
             "type": ConfigurationTypeField.SECRET,
-            "help_text": "Provide Stripe secret API key.",
+            "help_text": "Provide Checkout secret API key.",
             "label": "Secret API key",
         },
         "Store customers card": {
             "type": ConfigurationTypeField.BOOLEAN,
             "help_text": "Determines if Saleor should store cards on payments "
-            "in Stripe customer.",
+            "in Checkout customer.",
             "label": "Store customers card",
         },
         "Automatic payment capture": {
@@ -141,3 +142,12 @@ class CheckoutGatewayPlugin(BasePlugin):
             {"field": "api_key", "value": config.connection_params["public_key"]},
             {"field": "store_customer_card", "value": config.store_customer},
         ]
+
+    #
+    # def webhook(self, request: WSGIRequest, path: str, previous_value) -> HttpResponse:
+    #     # check if plugin is active
+    #     # check signatures and headers.
+    #     if path == '/webhook/paid':
+    #         # do something with the request
+    #         return JsonResponse(data={"paid": True})
+    #     return HttpResponseNotFound()

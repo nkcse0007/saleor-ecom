@@ -32,7 +32,6 @@ def require_active_plugin(fn):
 
 
 class StripeGatewayPlugin(BasePlugin):
-    print("Stripe Here ------------------------------------------------------------------")
     PLUGIN_NAME = GATEWAY_NAME
     PLUGIN_ID = "mirumee.payments.stripe"
     DEFAULT_CONFIGURATION = [
@@ -88,69 +87,53 @@ class StripeGatewayPlugin(BasePlugin):
         )
 
     def _get_gateway_config(self):
-        print("Stripe Return Value --------------------------------> 0")
         return self.config
 
     @require_active_plugin
     def authorize_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print("Stripe payment authenticate -------------------------> 1")
-
         return authorize(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def capture_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print("Stripe Payemnt Capture -------------------------------> 2")
-
         return capture(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def refund_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print("Stripe Refund payemnt --------------------------------> 4")
-
         return refund(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def void_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print("Stripe Void Payment ----------------------------------> 5")
-
         return void(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def process_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print("Stripe Process Payment -------------------------------> 6")
-
         return process_payment(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def list_payment_sources(
         self, customer_id: str, previous_value
     ) -> List["CustomerSource"]:
-        print("Stripe list payment source -------------------------------- 7")
         sources = list_client_sources(self._get_gateway_config(), customer_id)
         previous_value.extend(sources)
         return previous_value
 
     @require_active_plugin
     def get_supported_currencies(self, previous_value):
-        print("Stripe Currency check ---------------------------------> 8")
-
         config = self._get_gateway_config()
         return get_supported_currencies(config, GATEWAY_NAME)
 
     @require_active_plugin
     def get_payment_config(self, previous_value):
-        print("Stripe get payment config ----------------------------> 9")
-
         config = self._get_gateway_config()
         return [
             {"field": "api_key", "value": config.connection_params["public_key"]},

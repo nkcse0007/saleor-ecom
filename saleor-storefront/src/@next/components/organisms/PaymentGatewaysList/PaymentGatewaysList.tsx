@@ -102,22 +102,22 @@ const PaymentGatewaysList: React.FC<IProps> = ({
               <div key={index}>
                 <S.Tile checked={checked}>
                   <Radio
-                    data-test="checkoutPaymentGatewayStripeInput"
+                    data-test="checkoutPaymentGatewayBraintreeInput"
                     name="payment-method"
-                    value="stripe"
+                    value="checkout"
                     checked={checked}
                     onChange={() =>
                       selectPaymentGateway && selectPaymentGateway(id)
                     }
                     customLabel
                   >
-                    <span data-test="checkoutPaymentGatewayStripeName">
+                    <span data-test="checkoutPaymentGatewayBraintreeName">
                       {name}
                     </span>
                   </Radio>
                 </S.Tile>
                 {checked && (
-                  <StripePaymentGateway
+                  <BraintreePaymentGateway
                     config={config}
                     formRef={formRef}
                     formId={formId}
