@@ -33,7 +33,6 @@ def require_active_plugin(fn):
 
 
 class DummyGatewayPlugin(BasePlugin):
-    print("Here ------------------------------------------------------------------------> ")
     PLUGIN_ID = "mirumee.payments.dummy"
     PLUGIN_NAME = GATEWAY_NAME
     DEFAULT_ACTIVE = True

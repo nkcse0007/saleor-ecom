@@ -228,7 +228,6 @@ def get_currency_for_checkout(currency):
 
     Checkout's currency is using lowercase while Saleor is using uppercase.
     """
-    print(currency)
     return CURRENCIES_CHOICE[currency.upper()] if CURRENCIES_CHOICE[currency.upper()] else None
 
 

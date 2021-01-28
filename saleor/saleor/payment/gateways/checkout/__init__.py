@@ -42,7 +42,6 @@ def authorize(
     )
 
     try:
-        import random
         payment_res = client.payments.request(
             source={
                 "token": payment_information.token
@@ -60,6 +59,8 @@ def authorize(
             "Authorized", "Pending", "Card Verified", "Captured", "Declined", "Paid")
         response = _success_response(
             intent=payment_res, kind=kind, success=success,
+            amount=payment_information.amount,
+            currency=currency,
             customer_id=payment_res.customer.id,
             raw_response={
                 "payment_id": payment_res.id,
@@ -83,7 +84,7 @@ def capture(payment_information: PaymentData, config: GatewayConfig) -> GatewayR
     client = _get_client(**config.connection_params)
     intent = None
     try:
-        intent = client.payments.capture(payment_information.payment_id,
+        intent = client.payments.capture(payment_information.token,
                                          amount=payment_information.amount,
                                          reference='CAPTURE')
     except sdk.errors.CheckoutSdkError as exc:
@@ -100,7 +101,6 @@ def capture(payment_information: PaymentData, config: GatewayConfig) -> GatewayR
             kind=TransactionKind.CAPTURE,
             success=True,
         )
-        response = fill_card_details(intent, response)
     return response
 
 
@@ -109,7 +109,7 @@ def refund(payment_information: PaymentData, config: GatewayConfig) -> GatewayRe
     currency = get_currency_for_checkout(payment_information.currency)
     checkout_amount = get_amount_for_checkout(payment_information.amount, currency)
     try:
-        intent = client.payments.refund(str(payment_information.payment_id),
+        intent = client.payments.refund(str(payment_information.token),
                                         amount=checkout_amount,
                                         reference='REFUND')
     except sdk.errors.CheckoutSdkError as exc:
@@ -124,6 +124,7 @@ def refund(payment_information: PaymentData, config: GatewayConfig) -> GatewayRe
             amount=payment_information.amount,
             currency=get_currency_from_checkout(currency),
         )
+
     return response
 
 
@@ -150,7 +151,7 @@ def list_client_sources(
 def void(payment_information: PaymentData, config: GatewayConfig) -> GatewayResponse:
     client = _get_client(**config.connection_params)
     try:
-        intent = client.payments.void(str(payment_information.payment_id), reference='VOID')
+        intent = client.payments.void(str(payment_information.token), reference='VOID')
     except sdk.errors.CheckoutSdkError as exc:
         response = _error_response(
             kind=TransactionKind.VOID, exc=exc, payment_info=payment_information
@@ -210,11 +211,24 @@ def _success_response(
         raw_response=None,
 ):
     currency = currency or get_currency_from_checkout(intent.currency)
+
+    try:
+        action_required = intent.status == "requires_action"
+    except Exception as e:
+        print(e.__str__())
+        action_required = True
+
+    try:
+        transaction_id = intent.id
+    except Exception as e:
+        print(e.__str__())
+        transaction_id = intent.action_id
+
     return GatewayResponse(
         is_success=success,
-        action_required=intent.status == "requires_action",
-        transaction_id=intent.id,
-        amount=amount or get_amount_from_checkout(intent.amount, currency),
+        action_required=action_required,
+        transaction_id=transaction_id,
+        amount=amount,
         currency=currency,
         error=None,
         kind=kind,
