@@ -18,6 +18,7 @@ export * from "./CartRow";
 export * from "./AddressGridSelector";
 export * from "./StripeCreditCardForm";
 export * from "./BraintreePaymentGateway";
+export * from "./CheckoutPaymentGateway";
 export * from "./DummyPaymentGateway";
 export * from "./StripePaymentGateway";
 export * from "./PaymentGatewaysList";

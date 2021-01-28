@@ -8,6 +8,7 @@ import {
   DummyPaymentGateway,
   StripePaymentGateway,
   AdyenPaymentGateway,
+  CheckoutPaymentGateway,
 } from "..";
 import * as S from "./styles";
 import { IProps } from "./types";
@@ -100,9 +101,10 @@ const PaymentGatewaysList: React.FC<IProps> = ({
           case PROVIDERS.CHECKOUT.label:
             return (
               <div key={index}>
+                <p>{checked}</p>
                 <S.Tile checked={checked}>
                   <Radio
-                    data-test="checkoutPaymentGatewayBraintreeInput"
+                    data-test="checkoutPaymentGatewayCheckoutInput"
                     name="payment-method"
                     value="checkout"
                     checked={checked}
@@ -111,13 +113,13 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     }
                     customLabel
                   >
-                    <span data-test="checkoutPaymentGatewayBraintreeName">
+                    <span data-test="checkoutPaymentGatewayCheckoutName">
                       {name}
                     </span>
                   </Radio>
                 </S.Tile>
                 {checked && (
-                  <BraintreePaymentGateway
+                  <CheckoutPaymentGateway
                     config={config}
                     formRef={formRef}
                     formId={formId}
