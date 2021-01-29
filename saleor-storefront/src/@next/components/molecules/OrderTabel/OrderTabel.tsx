@@ -15,7 +15,7 @@ import { IProps } from "./types";
 const header = (matches: boolean) => (
   <S.HeaderRow>
     <S.IndexNumber>
-      <FormattedMessage defaultMessage="Index Number" />
+      <FormattedMessage defaultMessage="Order ID " />
     </S.IndexNumber>
     {matches && (
       <>
@@ -63,7 +63,7 @@ export const OrderTabel: React.FC<IProps> = ({ orders, history }: IProps) => {
                         history.push(`/order-history/${order.node.token}`);
                       }}
                     >
-                      <S.IndexNumber>{order.node.number}</S.IndexNumber>
+                      <S.IndexNumber>{btoa(order.node.number)}</S.IndexNumber>
                       {matches ? (
                         <>
                           <S.ProductsOrdered>

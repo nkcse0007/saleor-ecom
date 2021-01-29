@@ -42,7 +42,7 @@ ROOT_URLCONF = "saleor.urls"
 WSGI_APPLICATION = "saleor.wsgi.application"
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Ravi Kant Gautam', 'ravikant.gautam@techstriker.com'),
 )
 MANAGERS = ADMINS
 
@@ -136,6 +136,7 @@ if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
         SENDGRID_USERNAME,
         SENDGRID_PASSWORD,
     )
+
 email_config = dj_email_url.parse(
     EMAIL_URL or "console://demo@example.com:console@example/"
 )

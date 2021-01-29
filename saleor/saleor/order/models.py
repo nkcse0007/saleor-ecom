@@ -65,6 +65,9 @@ class OrderQueryset(models.QuerySet):
         qs = qs.exclude(status={OrderStatus.DRAFT, OrderStatus.CANCELED})
         return qs.distinct()
 
+class dummy(models.Model):
+    pass
+
 
 class Order(ModelWithMetadata):
     created = models.DateTimeField(default=now, editable=False)
