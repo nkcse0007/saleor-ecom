@@ -128,7 +128,7 @@ USE_TZ = True
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-EMAIL_URL = os.environ.get("EMAIL_URL")
+EMAIL_URL = "smtp://ravikant.gautam@techstriker.com:ravikant.gautam@smtp.gmail.com:465/?ssl=True"
 SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
 SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
 if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
@@ -149,6 +149,7 @@ EMAIL_PORT = email_config["EMAIL_PORT"]
 EMAIL_BACKEND = email_config["EMAIL_BACKEND"]
 EMAIL_USE_TLS = email_config["EMAIL_USE_TLS"]
 EMAIL_USE_SSL = email_config["EMAIL_USE_SSL"]
+
 
 # If enabled, make sure you have set proper storefront address in ALLOWED_CLIENT_HOSTS.
 ENABLE_ACCOUNT_CONFIRMATION_BY_EMAIL = get_bool_from_env(
