@@ -46,9 +46,9 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1"
+_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,18.217.46.182"
 
-ALLOWED_CLIENT_HOSTS = os.environ.get("ALLOWED_CLIENT_HOSTS")
+ALLOWED_CLIENT_HOSTS = ["18.217.46.182"]
 if not ALLOWED_CLIENT_HOSTS:
     if DEBUG:
         ALLOWED_CLIENT_HOSTS = _DEFAULT_CLIENT_HOSTS
@@ -57,7 +57,7 @@ if not ALLOWED_CLIENT_HOSTS:
             "ALLOWED_CLIENT_HOSTS environment variable must be set when DEBUG=False."
         )
 
-ALLOWED_CLIENT_HOSTS = get_list(ALLOWED_CLIENT_HOSTS)
+# ALLOWED_CLIENT_HOSTS = get_list(ALLOWED_CLIENT_HOSTS)
 
 INTERNAL_IPS = get_list(os.environ.get("INTERNAL_IPS", "127.0.0.1"))
 
@@ -129,13 +129,13 @@ USE_TZ = True
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 EMAIL_URL = "smtp://ravikant.gautam@techstriker.com:ravikant.gautam@smtp.gmail.com:465/?ssl=True"
-SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
-SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
-if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
-    EMAIL_URL = "smtp://%s:%s@smtp.sendgrid.net:587/?tls=True" % (
-        SENDGRID_USERNAME,
-        SENDGRID_PASSWORD,
-    )
+# SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
+# SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
+# if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
+#     EMAIL_URL = "smtp://%s:%s@smtp.sendgrid.net:587/?tls=True" % (
+#         SENDGRID_USERNAME,
+#         SENDGRID_PASSWORD,
+#     )
 
 email_config = dj_email_url.parse(
     EMAIL_URL or "console://demo@example.com:console@example/"
@@ -149,7 +149,6 @@ EMAIL_PORT = email_config["EMAIL_PORT"]
 EMAIL_BACKEND = email_config["EMAIL_BACKEND"]
 EMAIL_USE_TLS = email_config["EMAIL_USE_TLS"]
 EMAIL_USE_SSL = email_config["EMAIL_USE_SSL"]
-
 
 # If enabled, make sure you have set proper storefront address in ALLOWED_CLIENT_HOSTS.
 ENABLE_ACCOUNT_CONFIRMATION_BY_EMAIL = get_bool_from_env(
@@ -393,7 +392,7 @@ TEST_RUNNER = "saleor.tests.runner.PytestTestRunner"
 
 PLAYGROUND_ENABLED = get_bool_from_env("PLAYGROUND_ENABLED", True)
 
-ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1"))
+ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,18.217.46.182"))
 ALLOWED_GRAPHQL_ORIGINS = get_list(os.environ.get("ALLOWED_GRAPHQL_ORIGINS", "*"))
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
