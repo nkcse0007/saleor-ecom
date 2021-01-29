@@ -26,10 +26,10 @@ const ThankYou: React.FC<IProps> = ({
             <FormattedMessage defaultMessage="for your order!" />
           </span>
         </S.ThankYouHeader>
-        <S.Paragraph>
-          <FormattedMessage defaultMessage="Your order number is" />{" "}
-          <span>{orderNumber}</span>
-        </S.Paragraph>
+        {/*<S.Paragraph>*/}
+        {/*  <FormattedMessage defaultMessage="Your order number is" />{" "}*/}
+        {/*  <span>{orderNumber}</span>*/}
+        {/*</S.Paragraph>*/}
         <S.Paragraph>
           <FormattedMessage defaultMessage="We’ve emailed you an order confirmation, and we’ll notify you when the order has been shipped." />
         </S.Paragraph>
