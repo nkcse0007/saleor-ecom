@@ -67,10 +67,6 @@ def authorize(
                 "amount": payment_res.amount,
                 "approved": payment_res.approved,
                 "status": payment_res.status,
-                "source": {
-                    "type": payment_res.source.type,
-                    "id": payment_res.source.id,
-                },
                 "customer": {
                     "id": payment_res.customer.id,
                 }
