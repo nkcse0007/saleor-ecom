@@ -19,7 +19,7 @@ import RegisterForm from "./RegisterForm";
 import closeImg from "../../../images/x.svg";
 import ForgottenPassword from "./ForgottenPassword";
 
-class Login extends React.Component<
+class   Login extends React.Component<
   { overlay: OverlayContextInterface; active?: "login" | "register" },
   { active: "login" | "register" }
 > {
@@ -48,7 +48,7 @@ class Login extends React.Component<
           <Online>
             <div className="overlay__header">
               <p className="overlay__header-text">
-                <FormattedMessage defaultMessage="Saleor account" />
+                <FormattedMessage defaultMessage="Karaz account" />
               </p>
               <ReactSVG
                 path={closeImg}
