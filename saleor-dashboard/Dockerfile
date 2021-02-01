@@ -6,7 +6,8 @@ COPY . .
 ARG APP_MOUNT_URI
 ARG API_URI
 ARG STATIC_URL
-ENV API_URI ${API_URI:-http://localhost:8000/graphql/}
+#ENV API_URI ${API_URI:-http://localhost:8000/graphql/}
+ENV API_URI ${API_URI:-http://18.217.46.182:8000/graphql/}
 ENV APP_MOUNT_URI ${APP_MOUNT_URI:-/dashboard/}
 ENV STATIC_URL ${STATIC_URL:-/dashboard/}
 RUN STATIC_URL=${STATIC_URL} API_URI=${API_URI} APP_MOUNT_URI=${APP_MOUNT_URI} npm run build

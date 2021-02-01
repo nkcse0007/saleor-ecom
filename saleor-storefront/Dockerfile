@@ -8,7 +8,8 @@ ARG SENTRY_DSN
 ARG SENTRY_APM
 ARG DEMO_MODE
 ARG GTM_ID
-ENV API_URI ${API_URI:-http://localhost:8000/graphql/}
+#ENV API_URI ${API_URI:-http://localhost:8000/graphql/}
+ENV API_URI ${API_URI:-http://18.217.46.182:8000/graphql/}
 RUN API_URI=${API_URI} npm run build
 
 FROM nginx:stable
