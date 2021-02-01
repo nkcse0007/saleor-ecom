@@ -72,64 +72,54 @@ class DummyGatewayPlugin(BasePlugin):
         )
 
     def _get_gateway_config(self):
-        print("Return Values ----------------------------------> 0")
         return self.config
 
     @require_active_plugin
     def authorize_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print(" payment authenticate -------------------------> 1")
         return authorize(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def capture_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print(" Payemnt Capture -------------------------------> 2")
         return capture(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def confirm_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print(" Payment confirm -------------------------------> 3")
         return confirm(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def refund_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print(" Refund payemnt --------------------------------> 4")
         return refund(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def void_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print(" Void Payment ----------------------------------> 5")
         return void(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def process_payment(
         self, payment_information: "PaymentData", previous_value
     ) -> "GatewayResponse":
-        print(" Process Payment -------------------------------> 6")
         return process_payment(payment_information, self._get_gateway_config())
 
     @require_active_plugin
     def get_client_token(self, token_config: "TokenConfig", previous_value):
-        print(" Token recieved -------------------------------> 7")
         return get_client_token()
 
     @require_active_plugin
     def get_supported_currencies(self, previous_value):
-        print("Currency check ---------------------------------> 8")
         config = self._get_gateway_config()
         return get_supported_currencies(config, GATEWAY_NAME)
 
     @require_active_plugin
     def get_payment_config(self, previous_value):
-        print("get payment config ----------------------------> 9")
         config = self._get_gateway_config()
         return [{"field": "store_customer_card", "value": config.store_customer}]
