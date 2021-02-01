@@ -31,7 +31,7 @@ def get_bool_from_env(name, default_value):
     return default_value
 
 
-DEBUG = get_bool_from_env("DEBUG", True)
+DEBUG = False
 
 SITE_ID = 1
 
@@ -399,16 +399,16 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Amazon S3 configuration
 # See https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_ACCESS_KEY_ID = "AKIA2ZRJ3AQQH76AAKMD"
 AWS_LOCATION = os.environ.get("AWS_LOCATION", "")
-AWS_MEDIA_BUCKET_NAME = os.environ.get("AWS_MEDIA_BUCKET_NAME")
+AWS_MEDIA_BUCKET_NAME = "gokaraz-static"
 AWS_MEDIA_CUSTOM_DOMAIN = os.environ.get("AWS_MEDIA_CUSTOM_DOMAIN")
 AWS_QUERYSTRING_AUTH = get_bool_from_env("AWS_QUERYSTRING_AUTH", False)
 AWS_QUERYSTRING_EXPIRE = get_bool_from_env("AWS_QUERYSTRING_EXPIRE", 3600)
 AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_STATIC_CUSTOM_DOMAIN")
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY ="EGfVffdLO8R25CdbxehTL//S5ahuGBeD+C2wvqPq"
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_DEFAULT_ACL = os.environ.get("AWS_DEFAULT_ACL", None)
 
@@ -450,7 +450,7 @@ VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
 
 VERSATILEIMAGEFIELD_SETTINGS = {
     # Images should be pre-generated on Production environment
-    "create_images_on_demand": get_bool_from_env("CREATE_IMAGES_ON_DEMAND", DEBUG)
+    "create_images_on_demand": True
 }
 
 PLACEHOLDER_IMAGES = {
