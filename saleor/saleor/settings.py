@@ -42,7 +42,7 @@ ROOT_URLCONF = "saleor.urls"
 WSGI_APPLICATION = "saleor.wsgi.application"
 
 ADMINS = (
-#     ('Your name', 'youremail@example.com'),
+    #     ('Your name', 'youremail@example.com'),
 )
 MANAGERS = ADMINS
 
@@ -50,6 +50,7 @@ _DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,54.93.62.74"
 
 # ALLOWED_CLIENT_HOSTS = ["18.217.46.182"]
 ALLOWED_CLIENT_HOSTS = ["54.93.62.74"]
+# ALLOWED_CLIENT_HOSTS = ["127.0.0.1"]
 if not ALLOWED_CLIENT_HOSTS:
     if DEBUG:
         ALLOWED_CLIENT_HOSTS = _DEFAULT_CLIENT_HOSTS
@@ -129,15 +130,14 @@ USE_TZ = True
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-EMAIL_URL = "smtp://ravikant.gautam@techstriker.com:ravikant.gautam@smtp.gmail.com:465/?ssl=True"
-# SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
-# SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
-# if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
-#     EMAIL_URL = "smtp://%s:%s@smtp.sendgrid.net:587/?tls=True" % (
-#         SENDGRID_USERNAME,
-#         SENDGRID_PASSWORD,
-#     )
-
+EMAIL_URL = os.environ.get("EMAIL_URL")
+SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
+SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
+if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
+    EMAIL_URL = "smtp://%s:%s@smtp.sendgrid.net:587/?tls=True" % (
+        SENDGRID_USERNAME,
+        SENDGRID_PASSWORD,
+    )
 email_config = dj_email_url.parse(
     EMAIL_URL or "console://demo@example.com:console@example/"
 )
@@ -393,23 +393,23 @@ TEST_RUNNER = "saleor.tests.runner.PytestTestRunner"
 
 PLAYGROUND_ENABLED = get_bool_from_env("PLAYGROUND_ENABLED", True)
 
-ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,18.217.46.182"))
+ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,54.93.62.74"))
 ALLOWED_GRAPHQL_ORIGINS = get_list(os.environ.get("ALLOWED_GRAPHQL_ORIGINS", "*"))
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Amazon S3 configuration
 # See https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
-AWS_ACCESS_KEY_ID = "AKIA2ZRJ3AQQH76AAKMD"
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_LOCATION = os.environ.get("AWS_LOCATION", "")
-AWS_MEDIA_BUCKET_NAME = "gokaraz-static"
+AWS_MEDIA_BUCKET_NAME = os.environ.get("AWS_MEDIA_BUCKET_NAME", "")
 AWS_MEDIA_CUSTOM_DOMAIN = os.environ.get("AWS_MEDIA_CUSTOM_DOMAIN")
 AWS_QUERYSTRING_AUTH = get_bool_from_env("AWS_QUERYSTRING_AUTH", False)
 AWS_QUERYSTRING_EXPIRE = get_bool_from_env("AWS_QUERYSTRING_EXPIRE", 3600)
 AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_STATIC_CUSTOM_DOMAIN")
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
-AWS_SECRET_ACCESS_KEY ="EGfVffdLO8R25CdbxehTL//S5ahuGBeD+C2wvqPq"
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", None)
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_DEFAULT_ACL = os.environ.get("AWS_DEFAULT_ACL", None)
 
