@@ -46,11 +46,9 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,54.93.62.74"
+_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,gokaraz.com, api.gokaraz.com"
 
-# ALLOWED_CLIENT_HOSTS = ["18.217.46.182"]
-ALLOWED_CLIENT_HOSTS = ["54.93.62.74"]
-# ALLOWED_CLIENT_HOSTS = ["127.0.0.1"]
+ALLOWED_CLIENT_HOSTS = ["gokaraz.com, api.gokaraz.com"]
 if not ALLOWED_CLIENT_HOSTS:
     if DEBUG:
         ALLOWED_CLIENT_HOSTS = _DEFAULT_CLIENT_HOSTS
@@ -59,9 +57,7 @@ if not ALLOWED_CLIENT_HOSTS:
             "ALLOWED_CLIENT_HOSTS environment variable must be set when DEBUG=False."
         )
 
-# ALLOWED_CLIENT_HOSTS = get_list(ALLOWED_CLIENT_HOSTS)
-
-INTERNAL_IPS = get_list(os.environ.get("INTERNAL_IPS", "127.0.0.1"))
+INTERNAL_IPS = get_list(os.environ.get("ALLOWED_HOSTS"))
 
 DATABASES = {
     "default": dj_database_url.config(
@@ -393,7 +389,7 @@ TEST_RUNNER = "saleor.tests.runner.PytestTestRunner"
 
 PLAYGROUND_ENABLED = get_bool_from_env("PLAYGROUND_ENABLED", True)
 
-ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,54.93.62.74"))
+ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS"))
 ALLOWED_GRAPHQL_ORIGINS = get_list(os.environ.get("ALLOWED_GRAPHQL_ORIGINS", "*"))
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
