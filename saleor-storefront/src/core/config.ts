@@ -67,9 +67,9 @@ export const SOCIAL_MEDIA = [
 export const META_DEFAULTS = {
   custom: [],
   description:
-    "Karaz Store to Buys Online products",
+    "Go Karaz Store to Buys Online products",
   image: `${window.location.origin}${require("../images/logo.svg")}`,
-  title: "Karaz Store",
+  title: "Go Karaz",
   type: "website",
   url: window.location.origin,
 };

@@ -140,11 +140,11 @@ const CheckoutPaymentGateway: React.FC<IProps> = ({
             const checkoutPayloadErrors = [
                 {
                     message:
-                        "Payment submission error. Checkout gateway returned no token in payload.",
+                        "Payment submission error. Please check your card details or try later.",
                 },
             ];
             setSubmitErrors(checkoutPayloadErrors);
-            onError(checkoutPayloadErrors);
+            // onError(checkoutPayloadErrors);
         }
     };
 

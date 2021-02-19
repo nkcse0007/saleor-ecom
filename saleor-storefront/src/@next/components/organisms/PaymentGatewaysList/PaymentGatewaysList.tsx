@@ -49,7 +49,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     customLabel
                   >
                     <span data-test="checkoutPaymentGatewayBraintreeName">
-                      {name}
+                      Visa/Mastercard/Debit/Credit/Others Card
                     </span>
                   </Radio>
                 </S.Tile>
@@ -83,7 +83,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     customLabel
                   >
                     <span data-test="checkoutPaymentGatewayDummyName">
-                      {name}
+                      Visa/Mastercard/Debit/Credit/Others Card
                     </span>
                   </Radio>
                 </S.Tile>
@@ -114,7 +114,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     customLabel
                   >
                     <span data-test="checkoutPaymentGatewayCheckoutName">
-                      {name}
+                      Visa/Mastercard/Debit/Credit/Others Card
                     </span>
                   </Radio>
                 </S.Tile>
@@ -148,7 +148,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     customLabel
                   >
                     <span data-test="checkoutPaymentGatewayStripeName">
-                      {name}
+                      Visa/Mastercard/Debit/Credit/Others Card
                     </span>
                   </Radio>
                 </S.Tile>
@@ -182,7 +182,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     customLabel
                   >
                     <span data-test="checkoutPaymentGatewayAdyenName">
-                      {name}
+                      Visa/Mastercard/Debit/Credit/Others Card
                     </span>
                   </Radio>
                 </S.Tile>

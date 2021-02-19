@@ -46,9 +46,11 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,gokaraz.com, api.gokaraz.com"
+HOST_URI = ["gokaraz.com, api.gokaraz.com","localhost","127.0.0.1", "3.124.225.190"]
 
-ALLOWED_CLIENT_HOSTS = ["gokaraz.com, api.gokaraz.com"]
+_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,gokaraz.com, api.gokaraz.com,3.124.225.190"
+
+ALLOWED_CLIENT_HOSTS = HOST_URI
 if not ALLOWED_CLIENT_HOSTS:
     if DEBUG:
         ALLOWED_CLIENT_HOSTS = _DEFAULT_CLIENT_HOSTS
@@ -57,14 +59,13 @@ if not ALLOWED_CLIENT_HOSTS:
             "ALLOWED_CLIENT_HOSTS environment variable must be set when DEBUG=False."
         )
 
-INTERNAL_IPS = get_list(os.environ.get("ALLOWED_HOSTS"))
+INTERNAL_IPS = HOST_URI
 
 DATABASES = {
     "default": dj_database_url.config(
         default="postgres://saleor:saleor@localhost:5432/saleor", conn_max_age=600
     )
 }
-
 
 TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en"
@@ -126,7 +127,8 @@ USE_TZ = True
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-EMAIL_URL = os.environ.get("EMAIL_URL")
+
+EMAIL_URL = "smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:587/?tls=True"
 SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
 SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
 if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
@@ -135,7 +137,7 @@ if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
         SENDGRID_PASSWORD,
     )
 email_config = dj_email_url.parse(
-    EMAIL_URL or "console://demo@example.com:console@example/"
+    EMAIL_URL
 )
 
 EMAIL_FILE_PATH = email_config["EMAIL_FILE_PATH"]
@@ -263,7 +265,6 @@ INSTALLED_APPS = [
     "phonenumber_field",
 ]
 
-
 ENABLE_DEBUG_TOOLBAR = get_bool_from_env("ENABLE_DEBUG_TOOLBAR", False)
 if ENABLE_DEBUG_TOOLBAR:
     # Ensure the graphiql debug toolbar is actually installed before adding it
@@ -303,8 +304,8 @@ LOGGING = {
             "()": "saleor.core.logging.JsonFormatter",
             "datefmt": "%Y-%m-%dT%H:%M:%SZ",
             "format": (
-                "%(asctime)s %(levelname)s %(lineno)s %(message)s %(name)s "
-                + "%(pathname)s %(process)d %(threadName)s"
+                    "%(asctime)s %(levelname)s %(lineno)s %(message)s %(name)s "
+                    + "%(pathname)s %(process)d %(threadName)s"
             ),
         },
         "verbose": {
@@ -386,10 +387,9 @@ MAX_CHECKOUT_LINE_QUANTITY = int(os.environ.get("MAX_CHECKOUT_LINE_QUANTITY", 50
 
 TEST_RUNNER = "saleor.tests.runner.PytestTestRunner"
 
-
 PLAYGROUND_ENABLED = get_bool_from_env("PLAYGROUND_ENABLED", True)
 
-ALLOWED_HOSTS = get_list(os.environ.get("ALLOWED_HOSTS"))
+ALLOWED_HOSTS = HOST_URI
 ALLOWED_GRAPHQL_ORIGINS = get_list(os.environ.get("ALLOWED_GRAPHQL_ORIGINS", "*"))
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -469,7 +469,7 @@ AUTHENTICATION_BACKENDS = [
 # CELERY SETTINGS
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BROKER_URL = (
-    os.environ.get("CELERY_BROKER_URL", os.environ.get("CLOUDAMQP_URL")) or ""
+        os.environ.get("CELERY_BROKER_URL", os.environ.get("CLOUDAMQP_URL")) or ""
 )
 CELERY_TASK_ALWAYS_EAGER = not CELERY_BROKER_URL
 CELERY_ACCEPT_CONTENT = ["json"]
@@ -530,9 +530,9 @@ for entry_point in installed_plugins:
         PLUGINS.append(plugin_path)
 
 if (
-    not DEBUG
-    and ENABLE_ACCOUNT_CONFIRMATION_BY_EMAIL
-    and ALLOWED_CLIENT_HOSTS == get_list(_DEFAULT_CLIENT_HOSTS)
+        not DEBUG
+        and ENABLE_ACCOUNT_CONFIRMATION_BY_EMAIL
+        and ALLOWED_CLIENT_HOSTS == get_list(_DEFAULT_CLIENT_HOSTS)
 ):
     raise ImproperlyConfigured(
         "Make sure you've added storefront address to ALLOWED_CLIENT_HOSTS "
@@ -562,7 +562,6 @@ if "JAEGER_AGENT_HOST" in os.environ:
         validate=True,
     ).initialize_tracer()
 
-
 # Some cloud providers (Heroku) export REDIS_URL variable instead of CACHE_URL
 REDIS_URL = os.environ.get("REDIS_URL")
 if REDIS_URL:
@@ -576,7 +575,6 @@ JWT_TTL_APP_ACCESS = timedelta(
     seconds=parse(os.environ.get("JWT_TTL_APP_ACCESS", "5 minutes"))
 )
 JWT_TTL_REFRESH = timedelta(seconds=parse(os.environ.get("JWT_TTL_REFRESH", "30 days")))
-
 
 JWT_TTL_REQUEST_EMAIL_CHANGE = timedelta(
     seconds=parse(os.environ.get("JWT_TTL_REQUEST_EMAIL_CHANGE", "1 hour")),
