@@ -46,7 +46,7 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-HOST_URI = ["gokaraz.com, api.gokaraz.com","localhost","127.0.0.1", "3.124.225.190"]
+HOST_URI = ["gokaraz.com, api.gokaraz.com","dashboard.gokaraz.com", "store.gokaraz.com","localhost","127.0.0.1", "3.124.225.190"]
 
 _DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,gokaraz.com, api.gokaraz.com,3.124.225.190"
 
