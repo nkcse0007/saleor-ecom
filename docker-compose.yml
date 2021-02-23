@@ -28,7 +28,7 @@ services:
       - JAEGER_AGENT_HOST=jaeger
       - STOREFRONT_URL=http://localhost:3000/
       - DASHBOARD_URL=http://localhost:9000/
-      - EMAIL_URL=smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:587/?tls=True
+      - EMAIL_URL=smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:465/?ssl=True
 
   storefront:
     build:
@@ -97,7 +97,7 @@ services:
       # shared volume between worker and api for media
       - saleor-media:/app/media
     environment:
-      - EMAIL_URL=smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:587/?tls=True
+      - EMAIL_URL=smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:465/?ssl=True
 
   jaeger:
     image: jaegertracing/all-in-one

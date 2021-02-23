@@ -46,9 +46,9 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-HOST_URI = ["gokaraz.com","localhost","127.0.0.1", "3.124.225.190"]
+HOST_URI = ["gokaraz.com","localhost","127.0.0.1", "3.124.225.190", "store.gokaraz.com", "dashboard.gokaraz.com"]
 
-_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,gokaraz.com,3.124.225.190"
+_DEFAULT_CLIENT_HOSTS = "localhost,127.0.0.1,gokaraz.com,3.124.225.190,store.gokaraz.com,dashboard.gokaraz.com"
 
 ALLOWED_CLIENT_HOSTS = HOST_URI
 if not ALLOWED_CLIENT_HOSTS:
@@ -128,7 +128,7 @@ USE_TZ = True
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 
-EMAIL_URL = "smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:587/?tls=True"
+EMAIL_URL = "smtp://web@gokaraz.com:Sl62z3pcqh1L@smtp.gmail.com:465/?ssl=True"
 SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
 SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
 if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
