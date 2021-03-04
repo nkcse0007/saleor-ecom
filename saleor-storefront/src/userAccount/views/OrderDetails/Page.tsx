@@ -48,7 +48,7 @@ const Page: React.FC<{
                     <h3>
                         <FormattedMessage
                             defaultMessage="Your order ID : {orderNum}"
-                            values={{orderNum: btoa(order.number.toString())}}
+                            values={{orderNum: String(order.token.split("-")[0]+"0"+order.number).toUpperCase()}}
                         />
                     </h3>
                     <p className="order-details__status">

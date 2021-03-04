@@ -28,7 +28,7 @@ const ThankYou: React.FC<IProps> = ({
         </S.ThankYouHeader>
         <S.Paragraph>
           <FormattedMessage defaultMessage="Your order id is" />{" "}
-          <span>{btoa(orderNumber.toString())}</span>
+          <span>{orderNumber}</span>
         </S.Paragraph>
         <S.Paragraph>
           <FormattedMessage defaultMessage="We’ve emailed you an order confirmation, and we’ll notify you when the order has been shipped." />

@@ -53,6 +53,7 @@ def collect_data_for_email(
         prepare_order_details_url(order, redirect_url) if redirect_url else ""
     )
     email_context["order"] = order
+    email_context["sub_order"] = str(order.token.split("-")[0]+str(order.id)).upper()
 
     # Order confirmation template requires additional information
     if template in [CONFIRM_ORDER_TEMPLATE, STAFF_CONFIRM_ORDER_TEMPLATE]:

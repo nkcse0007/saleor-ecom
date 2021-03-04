@@ -280,7 +280,6 @@ def _create_order(*, checkout: Checkout, order_data: dict, user: User) -> Order:
     transaction.on_commit(
         lambda: send_staff_order_confirmation.delay(order.pk, checkout.redirect_url)
     )
-
     return order
 
 
@@ -427,5 +426,4 @@ def complete_checkout(
             release_voucher_usage(order_data)
             gateway.payment_refund_or_void(payment)
             raise ValidationError(f"Insufficient product stock: {e.item}", code=e.code)
-
     return order, action_required, action_data

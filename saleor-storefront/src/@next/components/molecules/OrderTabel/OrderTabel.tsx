@@ -63,7 +63,7 @@ export const OrderTabel: React.FC<IProps> = ({ orders, history }: IProps) => {
                         history.push(`/order-history/${order.node.token}`);
                       }}
                     >
-                      <S.IndexNumber>{btoa(order.node.number)}</S.IndexNumber>
+                      <S.IndexNumber>{String(order.node.token.split("-")[0]+"0"+order.node.number).toUpperCase()}</S.IndexNumber>
                       {matches ? (
                         <>
                           <S.ProductsOrdered>

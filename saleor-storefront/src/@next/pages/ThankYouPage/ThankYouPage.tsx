@@ -14,7 +14,7 @@ const ThankYouPage: React.FC<IProps> = ({}: IProps) => {
   return (
     <ThankYou
       continueShopping={() => history.push(BASE_URL)}
-      orderNumber={orderNumber}
+      orderNumber={String(token.split("-")[0]+"0"+orderNumber).toUpperCase()}
       orderDetails={() => history.push(generateGuestOrderDetailsUrl(token))}
     />
   );
