@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load price from taxed_prices %}
+{% load invoice_order_id_change %}
 <!DOCTYPE html>
 <html>
 
@@ -219,7 +220,7 @@
                 {% trans "Order:" context "Invoice PDF header: order number" %}
             </span>
             <div class="padded-font-sm"></div>
-            <span class="header-item">{{ order.token }}</span>
+            <span class="header-item">{{ order.token|order_uid }}{{ order.id }}</span>
             <div class="padded-font"></div>
             <span class="header-category">
                 {% trans "Date:" context "Invoice PDF header" %}
